@@ -45,8 +45,7 @@ def etl_dag():
         """
         #### Extract task
         A simple Extract task to get data ready for the rest of the data
-        pipeline. In this case, getting data is simulated by reading from a
-        hardcoded JSON string.
+        pipeline. In this case, getting data is from source db Postgres connection
         """
         log.info(f"Extract data from Postgres conn source_db " + json.dumps(last_id))
         batch_size = 10
@@ -71,8 +70,6 @@ def etl_dag():
     def transform(extract_data):
         """
         #### Transform task
-        A simple Transform task which takes in the collection of order data and
-        computes the total order value.
         """
         log.info("Transform data")
         return {"transform_data": extract_data}
@@ -85,7 +82,7 @@ def etl_dag():
         """
         #### Load task
         A simple Load task which takes in the result of the Transform task and
-        instead of saving it to end user review, just prints it out.
+        loading the data to target Postgres database
         """
         log.info("Load data from Postgres source_db conn DB to Postgres target_db conn DB")
         status = "SUCCESS"
@@ -128,6 +125,9 @@ def etl_dag():
 
     @task()
     def after_load(after_load_data):
+        """
+        after_load function is designing to store the job metadata
+        """
         log.info(f"Info after load {json.dumps(after_load_data)}")
         hook = PostgresHook(postgres_conn_id='target_db', schema='target')
         after_data = after_load_data["after_load_data"]
