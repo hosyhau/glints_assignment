@@ -1,0 +1,3 @@
+POSTGRES_USER=target_user
+POSTGRES_PASSWORD=target_password
+POSTGRES_DB=target

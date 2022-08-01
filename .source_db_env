@@ -1,0 +1,3 @@
+POSTGRES_USER=source_user
+POSTGRES_PASSWORD=source_password
+POSTGRES_DB=source
