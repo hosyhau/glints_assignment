@@ -11,9 +11,10 @@ log = logging.getLogger(__name__)
 
 
 @dag(
-    schedule_interval=None,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    schedule_interval="*/5 * * * *",
+    start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
     catchup=False,
+    tags=['POSTGRES_TO_POSTGRES'],
 )
 def etl_dag():
     """
