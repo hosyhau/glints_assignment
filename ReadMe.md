@@ -115,6 +115,6 @@ Port: 5433
 # Trigger etl_dag
 ## Navigate to the DAGs tab, please click into dag_id etl_dag button to make it active dag
 ## Trigger DAG by click the trigger button in right tab Actions.
-##Notes:
+## Notes:
 The Dag will pull the source DB to target DB every 5mins.
 In the target database: It has two table, first one is sale table from source, the second one is job table, it is a metadata table to store the log pulling records from source DB
